@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Floyd &amp; Co. Business Systems — Answer every lead. Book more jobs.</title>
-<meta name="description" content="Floyd & Co. installs the systems that answer every lead, quote faster, and turn calls into booked jobs. Built for HVAC, plumbing, and electrical contractors.">
+<meta name="description" content="Floyd & Co. installs the systems that answer every lead, quote faster, and turn calls into booked jobs. Built for HVAC, plumbing, and electrical contractors — and other local service businesses.">
 
 <!-- Favicon: amber F monogram on ink, inline so there's nothing extra to upload -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316181d'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo,Arial,sans-serif' font-size='40' font-weight='800' fill='%23e08a1e'%3EF%3C/text%3E%3C/svg%3E">
@@ -52,7 +52,7 @@
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
   .eyebrow{
     font-family:var(--mono);
-    font-size:.72rem;
+    font-size:.82rem;
     font-weight:700;
     letter-spacing:.18em;
     text-transform:uppercase;
@@ -95,10 +95,15 @@
   .brand{display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;line-height:1.05}
   .brand .mark{font-family:var(--display);font-weight:900;font-size:1.18rem;letter-spacing:-.02em}
   .brand .mark b{color:var(--accent-deep)}
-  .brand .sub{font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.16em;color:var(--text-soft);text-transform:uppercase}
-  .nav-links{display:flex;align-items:center;gap:2rem}
-  .nav-links a{font-size:.92rem;font-weight:500;color:var(--text-soft);transition:color .15s}
-  .nav-links a:hover{color:var(--ink)}
+  .brand .sub{font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.14em;color:var(--text-soft);text-transform:uppercase}
+  .nav-links{display:flex;align-items:center;gap:.6rem}
+  .nav-links a{
+    font-size:.86rem;font-weight:600;color:var(--steel);
+    background:rgba(58,108,152,.09);border:1px solid rgba(58,108,152,.4);
+    padding:.5rem .95rem;border-radius:7px;
+    transition:background .15s ease,color .15s ease,transform .15s ease;
+  }
+  .nav-links a:hover{background:var(--steel);color:#fff;transform:translateY(-1px)}
   .nav-cta{display:flex;align-items:center;gap:1.2rem}
   .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:.8rem;font-weight:700;letter-spacing:.1em}
 
@@ -109,7 +114,7 @@
   .hero h1 .hl{color:var(--accent-deep)}
   .hero p.lead{font-size:1.18rem;color:var(--text-soft);max-width:34ch;margin-bottom:2rem}
   .hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
-  .trust-line{margin-top:1.8rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--text-soft)}
+  .trust-line{margin-top:1.8rem;font-family:var(--mono);font-size:.88rem;letter-spacing:.05em;color:var(--text-soft)}
   .trust-line b{color:var(--ink)}
 
   /* ---------- Dispatch ticket (signature) ---------- */
@@ -124,7 +129,7 @@
     background-size:26px 26px;
     background-position:-1px -1px;
   }
-  .ticket-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--text-invert-soft);border-bottom:1px dashed var(--line-invert);padding-bottom:.9rem;margin-bottom:1.1rem}
+  .ticket-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;color:var(--text-invert-soft);border-bottom:1px dashed var(--line-invert);padding-bottom:.9rem;margin-bottom:1.1rem}
   .ticket-head .live{display:flex;align-items:center;gap:.45rem;color:var(--accent)}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(224,138,30,.6);animation:pulse 1.8s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,138,30,.55)}70%{box-shadow:0 0 0 9px rgba(224,138,30,0)}100%{box-shadow:0 0 0 0 rgba(224,138,30,0)}}
@@ -132,12 +137,12 @@
   .ticket-row .ico{width:34px;height:34px;border-radius:8px;background:var(--ink-2);display:grid;place-items:center;flex:none;font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--accent)}
   .ticket-row .meta{flex:1;min-width:0}
   .ticket-row .meta .name{font-weight:600;font-size:.95rem}
-  .ticket-row .meta .desc{font-size:.8rem;color:var(--text-invert-soft)}
-  .tag{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.1em;padding:.3rem .55rem;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+  .ticket-row .meta .desc{font-size:.88rem;color:var(--text-invert-soft)}
+  .tag{font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.08em;padding:.32rem .6rem;border-radius:5px;text-transform:uppercase;white-space:nowrap}
   .tag.amber{background:rgba(224,138,30,.16);color:var(--accent)}
   .tag.green{background:rgba(63,125,90,.2);color:#7fc79f}
   .tag.steel{background:rgba(58,108,152,.2);color:#8fbce0}
-  .ticket-foot{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--line-invert);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;color:var(--text-invert-soft)}
+  .ticket-foot{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--line-invert);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.82rem;color:var(--text-invert-soft)}
   .ticket-foot b{color:#7fc79f}
   .step{opacity:.32;transition:opacity .5s ease}
   .step.active{opacity:1}
@@ -162,14 +167,14 @@
   .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
   .card-sys{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.6rem;transition:transform .18s ease,box-shadow .18s ease}
   .card-sys:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(22,24,29,.35)}
-  .card-sys .label{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.14em;color:var(--accent-deep);text-transform:uppercase}
+  .card-sys .label{font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.1em;color:var(--accent-deep);text-transform:uppercase}
   .card-sys h3{margin:.7rem 0 .55rem}
   .card-sys p{color:var(--text-soft);font-size:.96rem}
 
   /* ---------- Process ---------- */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;counter-reset:s}
   .pstep{position:relative;padding-top:1.6rem;border-top:2px solid var(--ink)}
-  .pstep .num{font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.1em;color:var(--accent-deep)}
+  .pstep .num{font-family:var(--mono);font-weight:700;font-size:.9rem;letter-spacing:.08em;color:var(--accent-deep)}
   .pstep h3{margin:.7rem 0 .55rem}
   .pstep p{color:var(--text-soft);font-size:.96rem}
 
@@ -197,14 +202,14 @@
   .book h2{color:var(--text-invert);max-width:18ch;margin:.8rem auto 1rem}
   .book p{color:var(--text-invert-soft);max-width:48ch;margin:0 auto 2rem;font-size:1.08rem}
   .book-actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center}
-  .contacts{margin-top:2rem;display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:center;font-family:var(--mono);font-size:.82rem;letter-spacing:.04em}
+  .contacts{margin-top:2rem;display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:center;font-family:var(--mono);font-size:.92rem;letter-spacing:.03em}
   .contacts a{color:var(--text-invert-soft)}
   .contacts a:hover{color:var(--accent)}
 
   /* ---------- Lead form ---------- */
   .lead-form{max-width:520px;margin:1.8rem auto .4rem;text-align:left;display:grid;gap:.95rem}
   .lead-form .row{display:grid;grid-template-columns:1fr 1fr;gap:.95rem}
-  .lead-form label{display:block;font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-invert-soft);margin-bottom:.4rem}
+  .lead-form label{display:block;font-family:var(--mono);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-invert-soft);margin-bottom:.4rem}
   .lead-form input,.lead-form select,.lead-form textarea{width:100%;background:var(--ink-2);border:1px solid var(--line-invert);border-radius:8px;color:var(--text-invert);font-family:var(--body);font-size:1rem;padding:.8rem .9rem;transition:border-color .15s,box-shadow .15s}
   .lead-form input::placeholder,.lead-form textarea::placeholder{color:var(--text-invert-soft);opacity:.65}
   .lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(224,138,30,.22)}
@@ -213,18 +218,18 @@
   .lead-form textarea{resize:vertical;min-height:84px}
   .lead-form .btn-primary{width:100%;justify-content:center;margin-top:.2rem}
   .hp{position:absolute;left:-9999px}
-  .form-note{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--text-invert-soft);text-align:center}
+  .form-note{font-family:var(--mono);font-size:.8rem;letter-spacing:.03em;color:var(--text-invert-soft);text-align:center}
   .form-status{font-family:var(--body);font-size:.95rem;text-align:center;padding:.7rem .9rem;border-radius:8px;display:none}
   .form-status.show{display:block}
   .form-status.ok{background:rgba(63,125,90,.2);color:#9fe0bd}
   .form-status.err{background:rgba(224,138,30,.16);color:var(--accent)}
   .or-call{margin-top:1.6rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
-  .or-call .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--text-invert-soft)}
+  .or-call .lbl{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;color:var(--text-invert-soft)}
 
   /* ---------- Footer ---------- */
   footer{padding:3rem 0 2.4rem;border-top:1px solid var(--line)}
   .foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
-  .foot .small{font-family:var(--mono);font-size:.74rem;color:var(--text-soft);letter-spacing:.04em}
+  .foot .small{font-family:var(--mono);font-size:.84rem;color:var(--text-soft);letter-spacing:.03em}
 
   /* ---------- Reveal animation ---------- */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
@@ -237,8 +242,8 @@
     .cards{grid-template-columns:1fr}
     .nav-links{display:none}
     .menu-btn{display:block}
-    .nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:.5rem 24px 1rem}
-    .nav-links.open a{padding:.85rem 0;border-bottom:1px solid var(--line)}
+    .nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:.6rem;background:var(--paper);border-bottom:1px solid var(--line);padding:.8rem 24px 1.2rem}
+    .nav-links.open a{width:100%;text-align:center}
     .hero .ticket{order:-1}
   }
   @media(max-width:520px){
@@ -281,7 +286,7 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">For HVAC · Plumbing · Electrical</span>
+      <span class="eyebrow">For HVAC · Plumbing · Electrical + more</span>
       <h1>The job goes to whoever answers first. <span class="hl">Make that you.</span></h1>
       <p class="lead">Floyd &amp; Co. installs the systems that catch every lead, reply in seconds, and turn calls into booked jobs &mdash; so the work stops going to the next guy on the list.</p>
       <div class="hero-actions">
@@ -310,8 +315,8 @@
       <div class="ticket-row step" data-step="1">
         <div class="ico">⤵</div>
         <div class="meta">
-          <div class="name">Auto-text sent in 9 seconds</div>
-          <div class="desc">&ldquo;Sorry we missed you &mdash; what do you need?&rdquo;</div>
+          <div class="name">Auto-text sent in 10 seconds</div>
+          <div class="desc">&ldquo;Sorry we missed your call, how can we help you?&rdquo;</div>
         </div>
         <span class="tag steel">Replied</span>
       </div>
@@ -327,7 +332,7 @@
 
       <div class="ticket-foot">
         <span>RESPONSE TIME</span>
-        <span><b>9s</b> &middot; lead recovered</span>
+        <span><b>10s</b> &middot; lead recovered</span>
       </div>
     </div>
   </div>
@@ -430,7 +435,7 @@
       <p style="color:var(--text-invert-soft);margin-top:1rem;font-size:1.08rem">No logos-and-buzzwords pitch. We install systems that put more jobs on your schedule, and we&rsquo;re judged on whether they do.</p>
     </div>
     <ul class="why-list reveal">
-      <li><span class="check">✓</span><div><div class="wt">Built for the trades</div><div class="wd">HVAC, plumbing, and electrical &mdash; not a one-size template borrowed from another industry.</div></div></li>
+      <li><span class="check">✓</span><div><div class="wt">Built for the trades</div><div class="wd">HVAC, plumbing, and electrical first &mdash; and built to fit other local service businesses, too. Not a one-size template borrowed from a different industry.</div></div></li>
       <li><span class="check">✓</span><div><div class="wt">Outcomes, not jargon</div><div class="wd">You don&rsquo;t need to understand the tech. You need more booked jobs. That&rsquo;s the scorecard.</div></div></li>
       <li><span class="check">✓</span><div><div class="wt">Fast to deploy</div><div class="wd">Most systems are live in days, not months &mdash; so the leaks close quickly.</div></div></li>
       <li><span class="check">✓</span><div><div class="wt">We run it, you work</div><div class="wd">Ongoing management means it keeps working without adding to your plate.</div></div></li>
