@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floyd &amp; Co. Business Systems — Answer every lead. Book more jobs.</title>
+<meta name="description" content="Floyd & Co. installs the systems that answer every lead, quote faster, and turn calls into booked jobs. Built for HVAC, plumbing, and electrical contractors.">
+
+<!-- Favicon: amber F monogram on ink, inline so there's nothing extra to upload -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316181d'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo,Arial,sans-serif' font-size='40' font-weight='800' fill='%23e08a1e'%3EF%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#16181d;
+    --ink-2:#20242d;
+    --ink-3:#2b313c;
+    --paper:#ecebe5;
+    --card:#ffffff;
+    --accent:#e08a1e;        /* marigold — attention / caught lead */
+    --accent-deep:#c46f12;
+    --booked:#3f7d5a;        /* field green — secured / booked */
+    --steel:#3a6c98;         /* steel blue — info */
+    --text:#16181d;
+    --text-soft:#54585f;
+    --text-invert:#ecebe5;
+    --text-invert-soft:#9aa2af;
+    --line:rgba(22,24,29,.14);
+    --line-invert:rgba(236,235,229,.14);
+    --display:'Archivo',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --maxw:1140px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    color:var(--text);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+  }
+  .eyebrow.on-ink{color:var(--accent)}
+
+  h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.04;letter-spacing:-.02em}
+  h2{font-size:clamp(1.9rem,4vw,3rem)}
+  h3{font-size:1.2rem;font-weight:700;letter-spacing:-.01em}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.55rem;
+    font-family:var(--display);font-weight:800;font-size:.98rem;
+    letter-spacing:-.01em;
+    padding:.85rem 1.4rem;border-radius:8px;
+    border:2px solid transparent;cursor:pointer;white-space:nowrap;
+    transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--accent);color:var(--ink);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .btn-ghost.on-ink{border-color:var(--line-invert);color:var(--text-invert)}
+  .btn-ghost.on-ink:hover{border-color:var(--accent);color:var(--accent)}
+  .btn .arr{transition:transform .15s ease}
+  .btn:hover .arr{transform:translateX(3px)}
+
+  :focus-visible{outline:3px solid var(--steel);outline-offset:2px;border-radius:4px}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(236,235,229,.82);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;line-height:1.05}
+  .brand .mark{font-family:var(--display);font-weight:900;font-size:1.18rem;letter-spacing:-.02em}
+  .brand .mark b{color:var(--accent-deep)}
+  .brand .sub{font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.16em;color:var(--text-soft);text-transform:uppercase}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{font-size:.92rem;font-weight:500;color:var(--text-soft);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;align-items:center;gap:1.2rem}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:.8rem;font-weight:700;letter-spacing:.1em}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:clamp(3.5rem,8vw,6.5rem) 0 clamp(3rem,6vw,5rem)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:900;margin:1.1rem 0 1.3rem}
+  .hero h1 .hl{color:var(--accent-deep)}
+  .hero p.lead{font-size:1.18rem;color:var(--text-soft);max-width:34ch;margin-bottom:2rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+  .trust-line{margin-top:1.8rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--text-soft)}
+  .trust-line b{color:var(--ink)}
+
+  /* ---------- Dispatch ticket (signature) ---------- */
+  .ticket{
+    background:var(--ink);color:var(--text-invert);
+    border-radius:14px;padding:1.4rem;
+    box-shadow:0 26px 50px -22px rgba(22,24,29,.55);
+    position:relative;overflow:hidden;
+    background-image:
+      linear-gradient(var(--line-invert) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line-invert) 1px,transparent 1px);
+    background-size:26px 26px;
+    background-position:-1px -1px;
+  }
+  .ticket-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--text-invert-soft);border-bottom:1px dashed var(--line-invert);padding-bottom:.9rem;margin-bottom:1.1rem}
+  .ticket-head .live{display:flex;align-items:center;gap:.45rem;color:var(--accent)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(224,138,30,.6);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,138,30,.55)}70%{box-shadow:0 0 0 9px rgba(224,138,30,0)}100%{box-shadow:0 0 0 0 rgba(224,138,30,0)}}
+  .ticket-row{display:flex;align-items:center;gap:.85rem;padding:.7rem 0}
+  .ticket-row .ico{width:34px;height:34px;border-radius:8px;background:var(--ink-2);display:grid;place-items:center;flex:none;font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--accent)}
+  .ticket-row .meta{flex:1;min-width:0}
+  .ticket-row .meta .name{font-weight:600;font-size:.95rem}
+  .ticket-row .meta .desc{font-size:.8rem;color:var(--text-invert-soft)}
+  .tag{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.1em;padding:.3rem .55rem;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+  .tag.amber{background:rgba(224,138,30,.16);color:var(--accent)}
+  .tag.green{background:rgba(63,125,90,.2);color:#7fc79f}
+  .tag.steel{background:rgba(58,108,152,.2);color:#8fbce0}
+  .ticket-foot{margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--line-invert);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem;color:var(--text-invert-soft)}
+  .ticket-foot b{color:#7fc79f}
+  .step{opacity:.32;transition:opacity .5s ease}
+  .step.active{opacity:1}
+
+  /* ---------- Generic section spacing ---------- */
+  .band{padding:clamp(3.5rem,8vw,6rem) 0}
+  .band-ink{background:var(--ink);color:var(--text-invert)}
+  .band-ink h2{color:var(--text-invert)}
+  .sec-head{max-width:54ch;margin-bottom:2.6rem}
+  .sec-head h2{margin-top:.7rem}
+  .sec-head p{margin-top:1rem;color:var(--text-soft);font-size:1.08rem}
+  .band-ink .sec-head p{color:var(--text-invert-soft)}
+
+  /* ---------- Problem / leak list ---------- */
+  .leaks{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-invert);border:1px solid var(--line-invert);border-radius:12px;overflow:hidden}
+  .leak{background:var(--ink);padding:1.6rem 1.4rem}
+  .leak .n{font-family:var(--display);font-weight:900;font-size:2.6rem;color:var(--accent);line-height:1}
+  .leak .t{margin-top:.7rem;font-weight:600}
+  .leak .d{margin-top:.35rem;font-size:.9rem;color:var(--text-invert-soft)}
+
+  /* ---------- System cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .card-sys{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.6rem;transition:transform .18s ease,box-shadow .18s ease}
+  .card-sys:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(22,24,29,.35)}
+  .card-sys .label{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.14em;color:var(--accent-deep);text-transform:uppercase}
+  .card-sys h3{margin:.7rem 0 .55rem}
+  .card-sys p{color:var(--text-soft);font-size:.96rem}
+
+  /* ---------- Process ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;counter-reset:s}
+  .pstep{position:relative;padding-top:1.6rem;border-top:2px solid var(--ink)}
+  .pstep .num{font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.1em;color:var(--accent-deep)}
+  .pstep h3{margin:.7rem 0 .55rem}
+  .pstep p{color:var(--text-soft);font-size:.96rem}
+
+  /* ---------- Why ---------- */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+  .why-list{list-style:none;display:grid;gap:1.3rem}
+  .why-list li{display:flex;gap:1rem;align-items:flex-start}
+  .why-list .check{flex:none;width:26px;height:26px;border-radius:7px;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-weight:900;font-family:var(--display);font-size:.9rem;margin-top:2px}
+  .why-list .wt{font-weight:600;color:var(--text-invert)}
+  .why-list .wd{font-size:.93rem;color:var(--text-invert-soft);margin-top:.15rem}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px}
+  .faq details{border-bottom:1px solid var(--line);padding:1.15rem 0}
+  .faq summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;cursor:pointer;list-style:none;font-family:var(--display);font-weight:700;font-size:1.08rem;letter-spacing:-.01em}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .pm{flex:none;font-family:var(--mono);font-weight:700;color:var(--accent-deep);transition:transform .2s}
+  .faq details[open] summary .pm{transform:rotate(45deg)}
+  .faq p{margin-top:.8rem;color:var(--text-soft);max-width:62ch}
+
+  /* ---------- Book ---------- */
+  .book{background:var(--ink);color:var(--text-invert);border-radius:18px;padding:clamp(2.2rem,5vw,3.6rem);text-align:center;position:relative;overflow:hidden}
+  .book::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line-invert) 1px,transparent 1px),linear-gradient(90deg,var(--line-invert) 1px,transparent 1px);background-size:30px 30px;opacity:.5}
+  .book>*{position:relative}
+  .book h2{color:var(--text-invert);max-width:18ch;margin:.8rem auto 1rem}
+  .book p{color:var(--text-invert-soft);max-width:48ch;margin:0 auto 2rem;font-size:1.08rem}
+  .book-actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center}
+  .contacts{margin-top:2rem;display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:center;font-family:var(--mono);font-size:.82rem;letter-spacing:.04em}
+  .contacts a{color:var(--text-invert-soft)}
+  .contacts a:hover{color:var(--accent)}
+
+  /* ---------- Lead form ---------- */
+  .lead-form{max-width:520px;margin:1.8rem auto .4rem;text-align:left;display:grid;gap:.95rem}
+  .lead-form .row{display:grid;grid-template-columns:1fr 1fr;gap:.95rem}
+  .lead-form label{display:block;font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-invert-soft);margin-bottom:.4rem}
+  .lead-form input,.lead-form select,.lead-form textarea{width:100%;background:var(--ink-2);border:1px solid var(--line-invert);border-radius:8px;color:var(--text-invert);font-family:var(--body);font-size:1rem;padding:.8rem .9rem;transition:border-color .15s,box-shadow .15s}
+  .lead-form input::placeholder,.lead-form textarea::placeholder{color:var(--text-invert-soft);opacity:.65}
+  .lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(224,138,30,.22)}
+  .lead-form select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa2af' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;background-size:18px;padding-right:2.4rem}
+  .lead-form select option{color:#16181d;background:#fff}
+  .lead-form textarea{resize:vertical;min-height:84px}
+  .lead-form .btn-primary{width:100%;justify-content:center;margin-top:.2rem}
+  .hp{position:absolute;left:-9999px}
+  .form-note{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--text-invert-soft);text-align:center}
+  .form-status{font-family:var(--body);font-size:.95rem;text-align:center;padding:.7rem .9rem;border-radius:8px;display:none}
+  .form-status.show{display:block}
+  .form-status.ok{background:rgba(63,125,90,.2);color:#9fe0bd}
+  .form-status.err{background:rgba(224,138,30,.16);color:var(--accent)}
+  .or-call{margin-top:1.6rem;display:flex;flex-direction:column;align-items:center;gap:.7rem}
+  .or-call .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--text-invert-soft)}
+
+  /* ---------- Footer ---------- */
+  footer{padding:3rem 0 2.4rem;border-top:1px solid var(--line)}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+  .foot .small{font-family:var(--mono);font-size:.74rem;color:var(--text-soft);letter-spacing:.04em}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .hero-grid,.why-grid{grid-template-columns:1fr}
+    .leaks,.steps{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:.5rem 24px 1rem}
+    .nav-links.open a{padding:.85rem 0;border-bottom:1px solid var(--line)}
+    .hero .ticket{order:-1}
+  }
+  @media(max-width:520px){
+    .nav-cta .btn-primary{display:none}
+    .lead-form .row{grid-template-columns:1fr}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+    .step{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Floyd and Co. Business Systems home">
+      <span class="mark">Floyd <b>&amp;</b> Co.</span>
+      <span class="sub">Business Systems</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#problem">The problem</a>
+      <a href="#install">What we install</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">MENU</button>
+      <a href="#book" class="btn btn-primary">Free Business Review</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">For HVAC · Plumbing · Electrical</span>
+      <h1>The job goes to whoever answers first. <span class="hl">Make that you.</span></h1>
+      <p class="lead">Floyd &amp; Co. installs the systems that catch every lead, reply in seconds, and turn calls into booked jobs &mdash; so the work stops going to the next guy on the list.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn btn-primary">Free Business Review <span class="arr">&rarr;</span></a>
+        <a href="#install" class="btn btn-ghost">See what we install</a>
+      </div>
+      <p class="trust-line">Built for the trades, <b>We run it for you.</b></p>
+    </div>
+
+    <!-- Signature: a live dispatch ticket recovering a lost lead -->
+    <div class="ticket" id="ticket" aria-hidden="true">
+      <div class="ticket-head">
+        <span>TICKET #4471</span>
+        <span class="live"><span class="dot"></span>LIVE</span>
+      </div>
+
+      <div class="ticket-row step active" data-step="0">
+        <div class="ico">☎</div>
+        <div class="meta">
+          <div class="name">Incoming call &middot; (731) 555&middot;0142</div>
+          <div class="desc">Crew is on a job. Phone rings out.</div>
+        </div>
+        <span class="tag amber">Missed</span>
+      </div>
+
+      <div class="ticket-row step" data-step="1">
+        <div class="ico">⤵</div>
+        <div class="meta">
+          <div class="name">Auto-text sent in 9 seconds</div>
+          <div class="desc">&ldquo;Sorry we missed you &mdash; what do you need?&rdquo;</div>
+        </div>
+        <span class="tag steel">Replied</span>
+      </div>
+
+      <div class="ticket-row step" data-step="2">
+        <div class="ico">✓</div>
+        <div class="meta">
+          <div class="name">AC repair &middot; Tue 8:00 AM</div>
+          <div class="desc">Customer confirmed. Job on the schedule.</div>
+        </div>
+        <span class="tag green">Booked</span>
+      </div>
+
+      <div class="ticket-foot">
+        <span>RESPONSE TIME</span>
+        <span><b>9s</b> &middot; lead recovered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="band band-ink" id="problem">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow on-ink">Where the money leaks</span>
+      <h2>Most contractors aren&rsquo;t losing jobs on price. They&rsquo;re losing them on silence.</h2>
+      <p>When a customer calls and gets voicemail, they don&rsquo;t leave a message &mdash; they call the next number. Here&rsquo;s where the work quietly walks out the door.</p>
+    </div>
+    <div class="leaks reveal">
+      <div class="leak">
+        <div class="n">Voicemail</div>
+        <div class="t">Missed calls during jobs</div>
+        <div class="d">Crews can&rsquo;t answer with their hands full. The caller moves on in seconds.</div>
+      </div>
+      <div class="leak">
+        <div class="n">Slow</div>
+        <div class="t">Quotes that take days</div>
+        <div class="d">The first contractor to send a clear quote usually wins the job.</div>
+      </div>
+      <div class="leak">
+        <div class="n">Quiet</div>
+        <div class="t">A weak online presence</div>
+        <div class="d">Few reviews and a thin Google profile push you below competitors who look busier.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT WE INSTALL ============ -->
+<section class="band" id="install">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we install</span>
+      <h2>A system that works the phones, the inbox, and your reputation &mdash; around the clock.</h2>
+      <p>You keep doing the work. The systems handle the part that decides whether a caller becomes a customer.</p>
+    </div>
+    <div class="cards">
+      <div class="card-sys reveal">
+        <span class="label">Speed to lead</span>
+        <h3>Every call gets answered</h3>
+        <p>Miss a call and the customer gets an instant text back, then a follow-up until they reply. No lead sits unanswered.</p>
+      </div>
+      <div class="card-sys reveal">
+        <span class="label">Faster quotes</span>
+        <h3>Estimates out in minutes</h3>
+        <p>Intake forms feed a fast drafting system, so quotes go out while the customer is still deciding &mdash; not days later.</p>
+      </div>
+      <div class="card-sys reveal">
+        <span class="label">Reputation</span>
+        <h3>More 5-star reviews, on autopilot</h3>
+        <p>After each job, customers get a simple review request. Your Google profile climbs, and more local searches land on you.</p>
+      </div>
+      <div class="card-sys reveal">
+        <span class="label">Conversion</span>
+        <h3>A site built to book jobs</h3>
+        <p>A fast, mobile-first page with click-to-call and a quote request &mdash; built to turn visitors into scheduled work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="band" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. We do the heavy lifting.</h2>
+    </div>
+    <div class="steps">
+      <div class="pstep reveal">
+        <div class="num">STEP 01</div>
+        <h3>Inspect</h3>
+        <p>A free Business Review: we look at how your calls, quotes, and online reputation are handled today and show you exactly where jobs are slipping.</p>
+      </div>
+      <div class="pstep reveal">
+        <div class="num">STEP 02</div>
+        <h3>Install</h3>
+        <p>We set up your site, lead capture, and Google profile, then switch on the systems that answer leads and request reviews.</p>
+      </div>
+      <div class="pstep reveal">
+        <div class="num">STEP 03</div>
+        <h3>We run it for you</h3>
+        <p>Every month we keep it running, recover leads, and send you a plain report: calls caught, reviews earned, jobs booked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY FLOYD & CO ============ -->
+<section class="band band-ink">
+  <div class="wrap why-grid">
+    <div class="reveal">
+      <span class="eyebrow on-ink">Why Floyd &amp; Co.</span>
+      <h2 style="margin-top:.7rem">We&rsquo;re an operator, not an agency.</h2>
+      <p style="color:var(--text-invert-soft);margin-top:1rem;font-size:1.08rem">No logos-and-buzzwords pitch. We install systems that put more jobs on your schedule, and we&rsquo;re judged on whether they do.</p>
+    </div>
+    <ul class="why-list reveal">
+      <li><span class="check">✓</span><div><div class="wt">Built for the trades</div><div class="wd">HVAC, plumbing, and electrical &mdash; not a one-size template borrowed from another industry.</div></div></li>
+      <li><span class="check">✓</span><div><div class="wt">Outcomes, not jargon</div><div class="wd">You don&rsquo;t need to understand the tech. You need more booked jobs. That&rsquo;s the scorecard.</div></div></li>
+      <li><span class="check">✓</span><div><div class="wt">Fast to deploy</div><div class="wd">Most systems are live in days, not months &mdash; so the leaks close quickly.</div></div></li>
+      <li><span class="check">✓</span><div><div class="wt">We run it, you work</div><div class="wd">Ongoing management means it keeps working without adding to your plate.</div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="band" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Straight answers</span>
+      <h2>Questions contractors actually ask.</h2>
+    </div>
+    <div class="faq reveal">
+      <details open>
+        <summary>Do I need to understand any of the tech? <span class="pm">+</span></summary>
+        <p>No. You run your crew; we run the systems. You get a plain monthly report showing calls caught, reviews earned, and jobs booked &mdash; no dashboards to babysit.</p>
+      </details>
+      <details>
+        <summary>Will this work for a small shop? <span class="pm">+</span></summary>
+        <p>Especially a small shop. When it&rsquo;s just you and a couple of trucks, every missed call hurts the most &mdash; which is exactly what these systems stop.</p>
+      </details>
+      <details>
+        <summary>What does it cost? <span class="pm">+</span></summary>
+        <p>It depends on what your shop actually needs, which is what the free Business Review is for. We&rsquo;ll scope it and give you a flat number on the call &mdash; no surprises.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOK ============ -->
+<section class="band" id="book" style="padding-top:0">
+  <div class="wrap">
+    <div class="book reveal">
+      <span class="eyebrow on-ink">Free Business Review</span>
+      <h2>See where your jobs are leaking.</h2>
+      <p>Send your details and we&rsquo;ll set up your free 20-minute Business Review &mdash; a quick look at how your calls, quotes, and online reputation are handled now, and what to fix first. No pitch, no pressure.</p>
+
+      <!-- Lead form. Emails each submission to you via Web3Forms (free, no backend).
+           SETUP: get a free access key at https://web3forms.com using alek@floydcobusiness.com,
+           then paste it into the access_key value below. -->
+      <form id="leadForm" class="lead-form">
+        <input type="hidden" name="access_key" value="269ac7d4-f000-4c52-b686-df7b3ba28cd4">
+        <input type="hidden" name="subject" value="New lead from floydcobusiness.com">
+        <input type="hidden" name="from_name" value="Floyd &amp; Co. Website">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+        <div class="row">
+          <div>
+            <label for="lf-name">Name</label>
+            <input id="lf-name" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="lf-email">Email</label>
+            <input id="lf-email" type="email" name="email" placeholder="you@email.com" required>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="lf-phone">Phone</label>
+            <input id="lf-phone" type="tel" name="phone" placeholder="(731) 000-0000" required>
+          </div>
+          <div>
+            <label for="lf-business">Business (optional)</label>
+            <input id="lf-business" type="text" name="business" placeholder="Company name">
+          </div>
+        </div>
+        <div>
+          <label for="lf-trade">Trade</label>
+          <select id="lf-trade" name="trade">
+            <option>HVAC</option>
+            <option>Plumbing</option>
+            <option>Electrical</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="lf-msg">What&rsquo;s costing you leads? (optional)</label>
+          <textarea id="lf-msg" name="message" placeholder="Missed calls, slow quotes, few reviews&hellip;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Request my Free Business Review</button>
+        <div class="form-note">We&rsquo;ll call or text within one business day.</div>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="or-call">
+        <span class="lbl">Prefer to talk now?</span>
+        <a href="tel:+17314534332" class="btn btn-ghost on-ink">Call (731) 453&middot;4332</a>
+      </div>
+
+      <div class="contacts">
+        <a href="mailto:alek@floydcobusiness.com">alek@floydcobusiness.com</a>
+        <span>·</span>
+        <span>Serving West Tennessee &amp; beyond</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div class="brand">
+      <span class="mark">Floyd <b>&amp;</b> Co.</span>
+      <span class="sub">Business Systems</span>
+    </div>
+    <div class="small">&copy; <span id="yr"></span> Floyd &amp; Co. Business Systems &middot; floydcobusiness.com</div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.textContent = open ? 'CLOSE' : 'MENU';
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', false);
+      menuBtn.textContent = 'MENU';
+    });
+  });
+
+  // Scroll reveal
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // Dispatch ticket cycle (signature animation)
+  if (!reduce) {
+    var steps = Array.prototype.slice.call(document.querySelectorAll('#ticket .step'));
+    var i = 0;
+    setInterval(function(){
+      i = (i + 1) % (steps.length + 2); // pause at the end before looping
+      steps.forEach(function(s, idx){ s.classList.toggle('active', idx <= i); });
+    }, 1400);
+  } else {
+    document.querySelectorAll('#ticket .step').forEach(function(s){ s.classList.add('active'); });
+  }
+
+  // Lead form -> Web3Forms (emails the lead to you, no backend needed)
+  var leadForm = document.getElementById('leadForm');
+  if (leadForm) {
+    leadForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var status = document.getElementById('formStatus');
+      var btn = leadForm.querySelector('button[type="submit"]');
+      var orig = btn.textContent;
+      var data = Object.fromEntries(new FormData(leadForm).entries());
+      status.className = 'form-status';
+      btn.disabled = true; btn.textContent = 'Sending\u2026';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (res.success) {
+          leadForm.reset();
+          status.textContent = "Thanks \u2014 we got it. We'll reach out within one business day.";
+          status.className = 'form-status show ok';
+        } else {
+          status.textContent = "Something went wrong. Please call (731) 453-4332.";
+          status.className = 'form-status show err';
+        }
+      })
+      .catch(function(){
+        status.textContent = "Something went wrong. Please call (731) 453-4332.";
+        status.className = 'form-status show err';
+      })
+      .finally(function(){ btn.disabled = false; btn.textContent = orig; });
+    });
+  }
+</script>
+</body>
+</html>
